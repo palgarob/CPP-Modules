@@ -25,9 +25,10 @@ Contact::~Contact() {}
 
 void	Contact::init(void)
 {
-	this->_first_name = get_input("first name: ");
+	std::cout << "init" << std::endl;
+	/* this->_first_name = get_input("first name: ");
 	this->_last_name = get_input("last name: ");
 	this->_nickname = get_input("nickname: ");
 	this->_number = get_input("phone number: ");
-	this->_secret = get_input("darkest secret: ");
+	this->_secret = get_input("darkest secret: "); */
 }

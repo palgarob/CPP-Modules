@@ -7,7 +7,13 @@ PhoneBook::~PhoneBook() {}
 
 void	PhoneBook::add(void)
 {
-	static int i = 0;
-	this->_contacts[i % 8].init();
-	i++;
+	std::cout << "add" << std::endl;
+	this->_contacts[0].init();
+	return ;
+}
+
+void	PhoneBook::search(void)
+{
+	std::cout << "search" << std::endl;
+	return ;
 }

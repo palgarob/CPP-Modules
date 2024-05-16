@@ -6,26 +6,30 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:52:42 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/05/09 21:50:32 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:45:49 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cctype>
 #include <iostream>
 
-int	main(__attribute__((unused)) int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	argv++;
-	while (argv)
+	if (argc == 1)
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	else
 	{
-		char *str = *argv;
-		int i = 0;
-		while (str[i])
-		{
-			std::cout << &std::toupper(str[i]) << std::endl;
-			i++;
-		}
 		argv++;
+		while (*argv)
+		{
+			char	*str = *argv;
+			while (*str)
+			{
+				std::cout << (char)toupper(*str);
+				str++;
+			}
+			argv++;
+		}
 	}
+	std::cout << std::endl;
 	return (0);
 }

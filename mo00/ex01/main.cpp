@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <limits>
 
 int	main(void)
 {
@@ -7,12 +8,17 @@ int	main(void)
 
 	do
 	{
-		std::cin >> command;
-		if (command.compare("ADD"))
+		std::cout << "\nEnter a valid command (ADD, SEARCH or EXIT)\n-> " << std::flush;
+		std::getline(std::cin, command);
+		if (!command.compare("ADD"))
 			my_phonebook.add();
-		if (command.compare("SEARCH"))
+		else if (!command.compare("SEARCH"))
 			my_phonebook.search();
-	} while (!command.compare("EXIT"));
+		else if (!command.compare("EXIT"))
+			break;
+		else
+			std::cout << "\nNot a valid command, try again" << std::endl;
+	} while (1);
 
 	return 0;
 }

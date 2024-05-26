@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <limits>
 
 class Contact {
 
@@ -18,7 +19,8 @@ class Contact {
 		~Contact(void);
 
 		void	init(void);
-		void	contact_info(void);
+		void	display(void) const;
+		void	show(void) const;
 
 };
 

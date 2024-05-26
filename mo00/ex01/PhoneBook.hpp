@@ -7,8 +7,8 @@ class PhoneBook {
 
 	private:
 		Contact	_contacts[8];
-		int		next_entry;
-		int		n_contacts;
+		int		_next_entry;
+		int		_n_contacts;
 
 	public:
 		PhoneBook(void);

@@ -1,4 +1,4 @@
-NAME	= ex01
+NAME	= ex03
 
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
@@ -12,15 +12,15 @@ OBJ	= $(SRC:.cpp=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CXX) $(OBJ) -o $(NAME)
+	$(CXX) -o $(NAME) $(OBJ)
 
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-clean :
-	$(RM) $(OBJ)
+re : all fclean
 
 fclean : clean
 	$(RM) $(NAME)
 
-re : fclean all
+clean :
+	$(RM) $(OBJ)

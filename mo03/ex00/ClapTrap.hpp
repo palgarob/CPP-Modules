@@ -10,6 +10,7 @@ private:
 	unsigned int	_health;
 	unsigned int	_energy;
 	unsigned int	_damage;
+	ClapTrap();
 public:
 	ClapTrap(std::string name);
 	ClapTrap(ClapTrap const & src);

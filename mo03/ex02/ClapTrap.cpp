@@ -3,12 +3,12 @@
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _health(10), _energy(10), _damage(0)
 {
-	std::cout << "ClapTrap " << name << " was created with the default constructor." << std::endl;
+	std::cout << "ClapTrap " << name << " was constructed." << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src)
 {
-	std::cout << "ClapTrap " << src._name << " was copied with the copy constructor." << std::endl;
+	std::cout << "ClapTrap " << src._name << " was copied." << std::endl;
 	*this = src;
 }
 
@@ -26,7 +26,7 @@ ClapTrap &	ClapTrap::operator=(ClapTrap const & rhs)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap " << this->_name << " was destroyed" << std::endl;
+	std::cout << "ClapTrap " << this->_name << " was destroyed." << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)

@@ -1,15 +1,18 @@
+#ifndef FIXED_HPP
+#define FIXED_HPP
+
 #include <iostream>
 
 class Fixed
 {
 	private:
-		int	_value;
-		static const int _nfb = 8;
+		int					_rawBits;
+		static const int	_fracBits = 8;
 	public:
 		Fixed(void); // default
 		Fixed(Fixed const & src); // copy
-		Fixed(const int value);
-		Fixed(const float value);
+		Fixed(const int integer);
+		Fixed(const float floating);
 		~Fixed(void); // destructor
 
 		Fixed &	operator=(Fixed const & rhs); // assignment
@@ -23,5 +26,4 @@ class Fixed
 
 std::ostream &	operator<<(std::ostream & o, Fixed const & i);
 
-//100110100100110111100000000
-//000000000000000010011010010
+#endif

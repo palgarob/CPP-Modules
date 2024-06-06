@@ -1,8 +1,11 @@
+#ifndef FIXED_HPP
+#define FIXED_HPP
+
 class Fixed
 {
 	private:
-		int	_value;
-		static const int _nfb = 8;
+		int					_rawBits;
+		static const int	_fracBits = 8;
 	public:
 		Fixed(void); // default
 		Fixed(Fixed const & src); // copy
@@ -13,3 +16,5 @@ class Fixed
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 };
+
+#endif

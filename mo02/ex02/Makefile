@@ -1,0 +1,26 @@
+NAME	= ex02
+
+CXX			= c++
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+RM			= rm -rf
+
+SRC	= $(wildcard *.cpp)
+OBJ	= $(SRC:.cpp=.o)
+
+.PHONY : all re clean fclean
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	$(CXX) -o $(NAME) $(OBJ)
+
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+re : fclean all
+
+fclean : clean
+	$(RM) $(NAME)
+
+clean :
+	$(RM) $(OBJ)

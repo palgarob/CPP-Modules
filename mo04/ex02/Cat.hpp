@@ -1,0 +1,18 @@
+#ifndef CAT_HPP
+#define CAT_HPP
+
+#include "Animal.hpp"
+
+class Cat : public AAnimal
+{
+	public:
+		Cat();
+		Cat(Cat const & src);
+		Cat &	operator=(Cat const & rhs);
+		~Cat();
+		void	makeSound();
+	private:
+		Brain	*brain;
+};
+
+#endif

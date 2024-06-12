@@ -1,7 +1,5 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie() {}
-
 Zombie::~Zombie() {
 	std::cout << this->_name << " says bye!" << std::endl;
 }

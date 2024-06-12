@@ -1,9 +1,5 @@
 #include "Harl.hpp"
 
-Harl::Harl() {}
-
-Harl::~Harl() {}
-
 void	Harl::debug(void) {
 	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
 }
@@ -22,7 +18,7 @@ void	Harl::error() {
 
 void	Harl::complain(std::string level)
 {
-	void	(Harl::*prueba[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	void		(Harl::*prueba[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	for (int i = 0; i < 4; i++)

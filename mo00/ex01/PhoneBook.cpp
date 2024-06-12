@@ -2,15 +2,12 @@
 
 PhoneBook::PhoneBook() : _next_entry(0), _n_contacts(0) {}
 
-PhoneBook::~PhoneBook() {}
-
 void	PhoneBook::add(void)
 {
 	std::cout << "\nEnter contact information:" << std::endl;
 	this->_contacts[this->_next_entry].init();
 	this->_next_entry == 7 ? this->_next_entry = 0 : this->_next_entry++;
 	if (this->_n_contacts < 8) this->_n_contacts++;
-	std::cout << std::endl;
 	return ;
 }
 

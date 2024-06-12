@@ -1,26 +1,13 @@
-NAME	= ex04
+NAME	= sed2
 
-CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-RM			= rm -rf
-
-SRC	= $(wildcard *.cpp)
-OBJ	= $(SRC:.cpp=.o)
-
-.PHONY : all re clean fclean
+.PHONY : all re fclean
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CXX) -o $(NAME) $(OBJ)
-
-%.o : %.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+$(NAME) : main.cpp
+	c++ -Wall -Wextra -Werror -std=c++98 -o $(NAME) main.cpp
 
 re : fclean all
 
-fclean : clean
-	$(RM) $(NAME)
-
-clean :
-	$(RM) $(OBJ)
+fclean :
+	rm -rf $(NAME)

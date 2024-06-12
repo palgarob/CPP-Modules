@@ -15,9 +15,6 @@ class Contact {
 		std::string	_secret;
 
 	public:
-		Contact(void);
-		~Contact(void);
-
 		void	init(void);
 		void	display(void) const;
 		void	show(void) const;

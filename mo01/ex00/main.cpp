@@ -13,13 +13,12 @@ int	main(void)
 	std::cout << "\nI use the newZombie function to create a zombie ('dinamy') in heap but it doesn't announce itself" << std::endl;
 	Zombie	*heap_zombo2 = newZombie("dinamy");
 
-	std::cout << "\nI use the randomChump function to create a zombie ('scopy'). As soon as the function goes out of scope, the destructor is called" << std::endl;
-	randomChump("scopy");
-
-	std::cout << "\nI delete heapy and dinamy" << std::endl;
+	std::cout << "\nI delete heapy and dinamy, since I don't need them anymore" << std::endl;
 	delete heap_zombo;
 	delete heap_zombo2;
 
+	std::cout << "\nI use the randomChump function to create a zombie ('scopy'). As soon as the zombie goes out of scope, the destructor is called" << std::endl;
+	randomChump("scopy");
+
 	std::cout << "\nNow the program will finish, so stacky's destructor will be called automatically" << std::endl;
-	return 0;
 }

@@ -25,10 +25,6 @@ static std::string	trunc(std::string s)
 	return s;
 }
 
-Contact::Contact() {}
-
-Contact::~Contact() {}
-
 void	Contact::init(void)
 {
 	this->_first_name = get_input("first name: ");

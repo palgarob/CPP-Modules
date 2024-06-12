@@ -10,6 +10,7 @@ int	main(void)
 	{
 		std::cout << "\nEnter a valid command (ADD, SEARCH or EXIT)\n-> " << std::flush;
 		std::getline(std::cin, command);
+		if (!std::cin.good()) {std::cin.clear(); continue;}
 		if (!command.compare("ADD"))
 			my_phonebook.add();
 		else if (!command.compare("SEARCH"))
@@ -19,6 +20,4 @@ int	main(void)
 		else
 			std::cout << "\nNot a valid command, try again" << std::endl;
 	} while (1);
-
-	return 0;
 }

@@ -1,11 +1,13 @@
 NAME	= claptrap
 
+OBJ_DIR	= obj
+
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			= rm -rf
 
 SRC	= $(wildcard *.cpp)
-OBJ	= $(SRC:.cpp=.o)
+OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
 
 .PHONY : all re clean fclean
 
@@ -14,13 +16,14 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	$(CXX) -o $(NAME) $(OBJ)
 
-%.o : %.cpp
+$(OBJ_DIR)/%.o : %.cpp
+	mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-clean :
-	$(RM) $(OBJ)
+re : fclean all
 
 fclean : clean
 	$(RM) $(NAME)
 
-re : fclean all
+clean :
+	$(RM) $(OBJ_DIR)

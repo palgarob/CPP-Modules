@@ -3,7 +3,7 @@
 
 int	main(void)
 {
-	std::cout << "***Welcome to The Battle of the ClapTraps!!!***\n\n" << std::endl;
+	std::cout << "***Welcome to The Battle of the ClapTraps!!!***\n" << std::endl;
 	std::cout << "First round: Charlie vs. Marley" << std::endl;
 	ClapTrap	Charlie("Charlie");
 	ClapTrap	Marley("Marley");

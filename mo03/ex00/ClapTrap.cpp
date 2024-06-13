@@ -1,14 +1,19 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
+ClapTrap::ClapTrap()
+{
+	std::cout << "ClapTrap default constructor called" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name) : _name(name), _health(10), _energy(10), _damage(0)
 {
-	std::cout << "ClapTrap " << name << " was created with the default constructor." << std::endl;
+	std::cout << "ClapTrap " << name << " was created with the name constructor." << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src)
 {
-	std::cout << "ClapTrap " << src._name << " was copied with the copy constructor." << std::endl;
+	std::cout << "ClapTrap " << src._name << " was created with the copy constructor." << std::endl;
 	*this = src;
 }
 

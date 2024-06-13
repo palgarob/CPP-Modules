@@ -1,18 +1,24 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap()
 {
+	std::cout << "ScavTrap default constructor called" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string name)
+{
+	this->_name = name;
 	this->_health = 100;
 	this->_energy = 50;
 	this->_damage = 20;
-	std::cout << "Scavtrap " << this->_name << " was constructed." << std::endl;
+	std::cout << "Scavtrap " << this->_name << " was created with the name constructor." << std::endl;
 }
 
-ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap(src._name)
+ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap()
 {
 	*this = src;
-	std::cout << "Scavtrap " << this->_name << " was copied." << std::endl;
+	std::cout << "Scavtrap " << this->_name << " was created with the copy constructor." << std::endl;
 }
 
 ScavTrap &	ScavTrap::operator=(ScavTrap const & rhs)

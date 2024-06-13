@@ -4,6 +4,7 @@
 int	main(void)
 {
 	ScavTrap	Josephine("Josephine");
+	ScavTrap	Jo(Josephine);
 	Josephine.attack("enemy");
 	Josephine.beRepaired(600);
 	Josephine.takeDamage(197);

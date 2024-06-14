@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 20:52:42 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/05/15 09:45:49 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:13:44 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,4 @@ int	main(int argc, char **argv)
 			argv++;
 		}
 	}
-	std::cout << std::endl;
-	return (0);
 }

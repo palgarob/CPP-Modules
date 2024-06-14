@@ -1,17 +1,13 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/09 20:18:43 by pepaloma          #+#    #+#              #
-#    Updated: 2024/05/09 21:43:59 by pepaloma         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME	= megaphone
 
-CXX = c++
-CC = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+.PHONY : all re fclean
 
-megaphone : megaphone.o
+all : $(NAME)
+
+$(NAME) : megaphone.cpp
+	c++ -Wall -Wextra -Werror -std=c++98 -o $(NAME) megaphone.cpp
+
+re : fclean all
+
+fclean :
+	rm -rf $(NAME) megaphone.o

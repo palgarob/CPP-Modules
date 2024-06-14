@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 			break;
 		text.erase(ret, before.length());
 		text.insert(ret, after);
+		ret += after.length();
 	} while (1);
 	// Writing to output file stream
 	std::string	newFileName = fileName;

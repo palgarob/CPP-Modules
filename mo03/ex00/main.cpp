@@ -7,9 +7,10 @@ int	main(void)
 	std::cout << "First round: Charlie vs. Marley" << std::endl;
 	ClapTrap	Charlie("Charlie");
 	ClapTrap	Marley("Marley");
+	std::cout << "\nLet the battle begin" << std::endl;
 	Charlie.attack("Marley");
 	Marley.attack("Charlie");
-	std::cout << "\nBut nothing happens because their damage is 0!!" << std::endl;
+	std::cout << "But nothing happens because their damage is 0!!" << std::endl;
 	std::cout << "Otherwise it would've looked like this:" << std::endl;
 	Marley.takeDamage(3);
 	std::cout << "\nAlso, remember they can heal themselves as well" << std::endl;

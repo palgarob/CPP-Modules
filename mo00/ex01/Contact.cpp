@@ -9,6 +9,11 @@ static std::string	get_input(std::string prompt)
 		std::getline(std::cin, answer);
 		if (!std::cin.good() || answer.empty())
 		{
+			if (std::cin.eof())
+			{
+				std::cout << "EOF read, input stream fu**ed up." << std::endl;
+				exit(1);
+			}
 			std::cin.clear();
 			std::cout << "Invalid, try again" << std::endl;
 		}

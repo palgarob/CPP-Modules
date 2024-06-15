@@ -39,6 +39,11 @@ void	PhoneBook::search(void)
 				std::cout << "Enter an index number: " << std::flush;
 				std::cin >> index;
 				if (!std::cin.good() || index < 0 || index > this->_n_contacts) {
+					if (std::cin.eof())
+					{
+						std::cout << "EOF read, input stream fu**ed up." << std::endl;
+						exit(1);
+					}
 					std::cin.clear();
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					std::cout << "Invalid, try again" << std::endl;

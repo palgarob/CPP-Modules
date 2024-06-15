@@ -147,7 +147,7 @@ Fixed &	Fixed::min(Fixed & a, Fixed & b)
 	if (a <= b) return a; else return b;
 }
 
-Fixed const &	min(Fixed const & a, Fixed const & b)
+Fixed const &	Fixed::min(Fixed const & a, Fixed const & b)
 {
 	if (a <= b) return a; else return b;
 }

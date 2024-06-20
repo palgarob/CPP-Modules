@@ -23,7 +23,7 @@ AAnimal::~AAnimal()
 	std::cout << "AAnimal destructor called" << std::endl;
 }
 
-std::string	AAnimal::getType()
+std::string	AAnimal::getType() const
 {
 	return this->type;
 }

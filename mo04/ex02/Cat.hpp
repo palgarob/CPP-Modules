@@ -10,7 +10,7 @@ class Cat : public AAnimal
 		Cat(Cat const & src);
 		Cat &	operator=(Cat const & rhs);
 		~Cat();
-		void	makeSound();
+		void	makeSound() const;
 	private:
 		Brain	*brain;
 };

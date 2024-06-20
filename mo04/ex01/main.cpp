@@ -23,6 +23,7 @@ int	main(void)
 	std::cout << "\nNow we delete them all:" << std::endl;
 	for (size_t i = 0; i < n; i++)
 		delete animals[i];
-	
-
+	std::cout << "\nHere I make a quick copy to check that the copies are deep." << std::endl;
+	Dog	pup;
+	Dog	pupCpy(pup);
 }

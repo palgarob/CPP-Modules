@@ -39,7 +39,7 @@ int	main(void)
 		WrongAnimalPtr->makeSound();
 		std::cout << "\n->Since now we are going out of scope, the destructors will be called:" << std::endl;
 	}
-	std::cout << "\n*-*-*-*-*-*-*-*-*-*- 1. ON THE HEAP -*-*-*-*-*-*-*-*" << std::endl;
+	std::cout << "\n*-*-*-*-*-*-*-*-*-*- 2. ON THE HEAP -*-*-*-*-*-*-*-*" << std::endl;
 	{
 		std::cout << "\n->Let's create an Animal * (pointer) that'll point to a cat located on heap:" << std::endl;
 		Animal	*catptr = new Cat;

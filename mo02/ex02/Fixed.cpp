@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/12 19:52:59 by pepaloma          #+#    #+#             */
+/*   Updated: 2025/03/12 20:18:20 by pepaloma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 #include <cmath>
 
@@ -6,14 +18,9 @@ Fixed::Fixed() : _rawBits(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int integer) : _rawBits(integer << Fixed::_fracBits)
+Fixed::~Fixed()
 {
-	std::cout << "Int constructor called" << std::endl;
-}
-
-Fixed::Fixed(const float floating) : _rawBits(roundf(floating * (1 << Fixed::_fracBits)))
-{
-	std::cout << "Float contructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(Fixed const & src)
@@ -29,9 +36,14 @@ Fixed &	Fixed::operator=(Fixed const & rhs)
 	return *this;
 }
 
-Fixed::~Fixed()
+Fixed::Fixed(const int integer) : _rawBits(integer << Fixed::_fracBits)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed(const float floating) : _rawBits(roundf(floating * (1 << Fixed::_fracBits)))
+{
+	std::cout << "Float contructor called" << std::endl;
 }
 
 //MEMBER FUNCTIONS
@@ -140,8 +152,6 @@ Fixed	Fixed::operator--(int)
 	return cpy;
 }
 
-// MIN & MAX FUNCTIONS
-
 Fixed &	Fixed::min(Fixed & a, Fixed & b)
 {
 	if (a <= b) return a; else return b;
@@ -161,8 +171,6 @@ Fixed const &	Fixed::max(Fixed const & a, Fixed const & b)
 {
 	if (a >= b) return a; else return b;
 }
-
-// OUTPUT STREAM OPERATOR
 
 std::ostream &	operator<<(std::ostream & o, Fixed const & i)
 {

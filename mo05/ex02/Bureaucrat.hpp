@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:10:50 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/17 11:40:14 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:15:02 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ class AForm;
 class Bureaucrat
 {
 	private:
-		std::string	_name;
-		int			_grade;
+		const std::string 	_name;
+		int _grade;
+		void checkRange() const;
 	public:
 		Bureaucrat();
 		~Bureaucrat();
@@ -35,10 +36,14 @@ class Bureaucrat
 		void	downGrade();
 		void	upGrade();
 		void	signForm(AForm&) const;
-		void	executeForm(const AForm&) const;
+		void executeForm(const AForm& form) const;
 
-		class GradeTooHighException : public std::exception {};
-		class GradeTooLowException : public std::exception {};
+		class GradeTooHighException : public std::exception {
+			const char* what() const throw();
+		};
+		class GradeTooLowException : public std::exception {
+			const char* what() const throw();
+		};
 };
 
 std::ostream&	operator<<(std::ostream&, const Bureaucrat&);

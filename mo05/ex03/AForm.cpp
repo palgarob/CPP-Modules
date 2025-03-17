@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:37:03 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/15 20:33:50 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:27:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ const char* AForm::GradeTooHighException::what() const throw()
 const char* AForm::GradeTooLowException::what() const throw()
 {
 	return "Form::gradeTooLowException: Either you're trying to\n\
-	 initialize a form with a grade too low or you can't sign this!!";
+initialize a form with a grade too low or you can't sign this!!";
 }
 
 const char* AForm::NotSigned::what() const throw()
 {
 	return ("AForm::NotSigned: You can't execute this file\n\
-		because is not signed yet!");
+because is not signed yet!");
 }

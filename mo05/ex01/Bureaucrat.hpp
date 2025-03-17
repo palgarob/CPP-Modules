@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:10:50 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/15 13:41:16 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:42:37 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ class Form;
 class Bureaucrat
 {
 	private:
-		std::string	_name;
+		const std::string	_name;
 		int			_grade;
+		void checkRange() const;
 	public:
 		Bureaucrat();
 		~Bureaucrat();
@@ -36,12 +37,10 @@ class Bureaucrat
 		void	upGrade();
 		void	signForm(Form&) const;
 
-		class GradeTooHighException : public std::exception
-		{
+		class GradeTooHighException : public std::exception {
 			const char* what() const throw();
 		};
-		class GradeTooLowException : public std::exception
-		{
+		class GradeTooLowException : public std::exception {
 			const char* what() const throw();
 		};
 };

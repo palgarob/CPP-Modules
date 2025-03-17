@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:37:03 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/15 13:41:16 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:05:09 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ std::ostream& operator<<(std::ostream& os, const Form& form) {
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-	return "Form::GradeTooHighException: Don't try to initialize\n\
-	 a form with zero or negative numbers!";
+	return "Form::GradeTooHighException: Don't try to initialize \
+a form with zero or negative numbers!";
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-	return "Form::GradeTooLowException: Either you're trying to\n\
-	 initialize a form with a grade too low or you can't sign this!!";
+	return "Form::GradeTooLowException: Either you're trying to \
+initialize a form with a grade too low or you can't sign this!!";
 }

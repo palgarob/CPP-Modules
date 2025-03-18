@@ -82,6 +82,7 @@ See [intro](#-intro)
 
 - [ ] Do bonuses.
 - [ ] Review modules
+- [ ] Do a better use of switch case to not use complex if else thingies
 
 ## 🤝 Acknowledgements
 

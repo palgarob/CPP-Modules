@@ -6,9 +6,12 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:25:46 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/20 01:59:52 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/20 03:30:49 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 
 #include <iostream>
 #include <stdint.h>
@@ -28,3 +31,5 @@ class Serializer
 		static uintptr_t serialize(Data *ptr);
 		static Data* deserialize(uintptr_t raw);
 };
+
+#endif

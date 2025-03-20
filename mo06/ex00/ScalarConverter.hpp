@@ -6,9 +6,12 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:20:49 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/18 19:09:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/20 03:28:14 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef SCALARCONVERTER_HPP
+#define SCALARCONVERTER_HPP
 
 #include <iostream>
 
@@ -23,3 +26,5 @@ class ScalarConverter {
 		static void	convert(const std::string& input);
 	
 };
+
+#endif

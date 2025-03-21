@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:59:29 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/21 15:32:39 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:32:14 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void identify(Base& p)
 #include <iostream>
 
 int main() {
-	Base* obj = generate(); // Generate a random object
+	Base* obj = generate();
 	std::cout << "Identifying using pointer: ";
 	identify(obj);
 
 	std::cout << "Identifying using reference: ";
-	identify(*obj); // Pass as reference
+	identify(*obj);
 
-	delete obj; // Free memory
+	delete obj;
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:15:43 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/20 03:29:52 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:28:48 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,4 @@ class A : public Base {};
 class B : public Base {};
 class C : public Base {};
 
-#endif // BASE_HPP
+#endif

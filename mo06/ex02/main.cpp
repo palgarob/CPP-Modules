@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:59:29 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/20 22:33:48 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:32:39 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,32 @@ void identify(Base* p)
 void identify(Base& p)
 {
 	try {
-		(void)dynamic_cast<A&>(p);
+		dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
-	} catch (std::exception&) {}
+	} catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
 	try {
-		(void)dynamic_cast<B&>(p);
+		dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
-	} catch (std::exception&) {}
+	} catch (std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
 
 	try {
-		(void)dynamic_cast<C&>(p);
+		dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
-	} catch (std::exception&) {}
+	} catch (std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
 }
 
 #include "Base.hpp"
 #include <iostream>
 
 int main() {
-	std::srand(time(0)); // Seed random generator
-
 	Base* obj = generate(); // Generate a random object
 	std::cout << "Identifying using pointer: ";
 	identify(obj);

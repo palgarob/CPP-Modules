@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:46:22 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/20 01:19:07 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:20:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,15 @@ void ScalarConverter::convert(const std::string& input)
 	}
 	else
 	{
-		int	num;
+		long long	num;
 		std::stringstream strs(input);
 		strs >> num;
+		if (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max())
+			impossible();
+		else
 		{
 			output(
-				num,
+				static_cast<int>(num),
 				static_cast<float>(num),
 				static_cast<double>(num)
 			);

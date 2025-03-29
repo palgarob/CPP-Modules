@@ -6,9 +6,12 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:24:10 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/26 16:37:17 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/29 12:36:03 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef MAX_HPP
+#define MAX_HPP
 
 template<typename T>
 const T& max(const T& a, const T& b)
@@ -18,3 +21,5 @@ const T& max(const T& a, const T& b)
 	else
 		return b;
 }
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:46:22 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/30 20:48:04 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/31 08:37:26 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ static void printInt(int i)
 	if (i >= 33 && i <= 126)
 		std::cout << "char:		" << static_cast<char>(i) << std::endl;
 	else if (
-		i >= std::numeric_limits<unsigned char>::min()
-		&& i <= std::numeric_limits<unsigned char>::max()
+		i >= std::numeric_limits<char>::min()
+		&& i <= std::numeric_limits<char>::max()
 	)
 		std::cout << "char:		Non displayable" << std::endl;
 	else
 		std::cout << "char:		impossible" << std::endl;
-	std::cout << static_cast<int>(std::numeric_limits<unsigned char>::min());
 	std::cout << "int:		" << i << std::endl;
 	std::cout << "float:		" << static_cast<float>(i) << ".0" << "f" << std::endl;
 	std::cout << "double:		" << static_cast<double>(i) << ".0" << std::endl;
@@ -49,7 +48,7 @@ static void printFloat(float i)
 	std::cout << "double:		" << static_cast<double>(i) << (std::fmod(i, 1.0) == 0 ? ".0" : "") << std::endl;
 }
 
-static void printDouble(float i)
+static void printDouble2(double i)
 {
 	if (i >= 33 && i <= 126)
 		std::cout << "char:		" << static_cast<char>(i) << std::endl;
@@ -62,6 +61,14 @@ static void printDouble(float i)
 		std::cout << "char:		impossible" << std::endl;
 	std::cout << "int:		" << static_cast<int>(i) << std::endl;
 	std::cout << "float:		" << static_cast<float>(i) << (std::fmod(i, 1.0) == 0 ? ".0" : "") << "f" << std::endl;
+	std::cout << "double:		" << i << (std::fmod(i, 1.0) == 0 ? ".0" : "") << std::endl;
+}
+
+static void printDouble1(double i)
+{
+	std::cout << "char:		impossible" << std::endl;
+	std::cout << "int:		impossible" << std::endl;
+		std::cout << "float:		" << static_cast<float>(i) << (std::fmod(i, 1.0) == 0 ? ".0" : "") << "f" << std::endl;
 	std::cout << "double:		" << i << (std::fmod(i, 1.0) == 0 ? ".0" : "") << std::endl;
 }
 
@@ -86,7 +93,7 @@ void ScalarConverter::convert(const std::string& input)
 			printInt(i);
 		}
 		else {
-			printDouble(dou);
+			printDouble1(dou);
 		}
 	}
 	else {
@@ -96,7 +103,7 @@ void ScalarConverter::convert(const std::string& input)
 			printFloat(flo);
 		}
 		else {
-			printDouble(dou);
+			printDouble2(dou);
 		}
 	}
 }

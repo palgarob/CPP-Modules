@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:59:29 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/21 16:32:14 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:56:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void identify(Base* p)
 void identify(Base& p)
 {
 	try {
-		dynamic_cast<A&>(p);
+		p = dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
 	} catch (std::exception& e)
 	{
@@ -46,14 +46,14 @@ void identify(Base& p)
 	}
 
 	try {
-		dynamic_cast<B&>(p);
+		p = dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 	} catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
 
 	try {
-		dynamic_cast<C&>(p);
+		p = dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
 	} catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;

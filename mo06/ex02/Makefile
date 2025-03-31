@@ -6,12 +6,12 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 20:48:03 by pepaloma          #+#    #+#              #
-#    Updated: 2025/03/20 22:34:09 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/03/31 09:58:37 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	:= base
+NAME	:= a.out
 SRC		:= $(wildcard *.cpp)
 OBJ		:= $(SRC:.cpp=.o)
 

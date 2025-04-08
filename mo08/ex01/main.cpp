@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:42 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/04/03 19:44:05 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:38:49 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 #include <iostream>
 #include <ctime>
 #include <algorithm>
+#include <vector>
 
 int main()
 {
-	int n = 4;
-	srand(time(NULL));
-	Span s(n);
-	for (int i = 0; i < n; i++)
-	{
-		s.addNumber(rand());
-	}
+	Span s(100);
+	s.fillVector();
+	std::cout << "List:" << std::endl;
 	s.printList();
-	std::cout << "-------" << std::endl;
-	std::cout << s.shortestSpan() << std::endl;
-	std::cout << "-------" << std::endl;
-	std::cout << s.longestSpan() << std::endl;
+	std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
+	std::cout << "Longest span: " << s.longestSpan() << std::endl;
 }

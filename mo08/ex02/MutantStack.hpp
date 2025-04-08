@@ -6,9 +6,12 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 10:10:26 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/04/08 12:00:44 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:55:31 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef MUTANTSTACK_HPP
+#define MUTANTSTACK_HPP
 
 #include <stack>
 #include <deque>
@@ -53,3 +56,7 @@ public:
 	const_reverse_iterator rbegin() const { return this->c.rbegin(); }
 	const_reverse_iterator rend() const { return this->c.rend(); }
 };
+
+
+
+#endif

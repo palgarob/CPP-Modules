@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:59:39 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/04/29 23:26:12 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/04/30 21:02:43 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <sstream>
 #include <limits>
 
-void parse_db(std::map<std::time_t, double>& db, std::ifstream& dbstream)
+void create_db(std::map<std::string, double>& db, std::ifstream& dbstream)
 {
 	std::string line;
 	std::stringstream ss;
@@ -31,46 +31,28 @@ void parse_db(std::map<std::time_t, double>& db, std::ifstream& dbstream)
 	
 	while (std::getline(dbstream, line))
 	{
-		if (line == "\n")
-			break;
 		key = line.substr(0, 10);
 		ss.clear();
 		ss.str(line.substr(11));
 		ss >> val;
-		db[strtotime(key)] = val;
+		db[key] = val;
 	}
 }
 
-
-void parse_input(std::map<std::time_t, double>& input, std::ifstream& inputstream)
+void create_dates_table(
+	std::map<std::time_t, std::string>& dates_table,
+	const std::map<std::string, double>& db
+)
 {
-	std::string line;
-	std::stringstream ss;
-	std::string key;
-	double val;
-
-	while (std::getline(inputstream, line))
+	std::map<std::string, double>::const_iterator it = db.begin();
+	std::map<std::string, double>::const_iterator next = it;
+	next++;
+	for (std::time_t key = 0; key < strtotime("2026-01-01"); key += 86400)
 	{
-		if (line[10] != ' ' && line[11] != '|' && line[12] != ' ')
-		{
-			std::cerr << "Error: bad input " << line << std::endl;
-			exit(1);
+		dates_table[key] = it->first;
+		if (next != db.end() && key > strtotime(next->first)) {
+			it++; next++;
 		}
-		ss.clear();
-		ss.str(line.substr(13));
-		ss >> val;
-		if (ss.fail())
-		{
-			std::cerr << "Error: parsing number" << std::endl;
-			exit(1);
-		}
-		key = line.substr(0, 10);
-		if (strtotime(key) == -1)
-		{
-			std::cerr << "Error: parsing date" << std::endl;
-			exit(1);
-		}
-		input[strtotime(key)] = val;
 	}
 }
 
@@ -96,11 +78,14 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	// create maps
-	std::map<std::time_t, double> db;
-	std::map<std::time_t, double> input;
-	parse_db(db, dbstream);
-	parse_input(input, inputstream);
-	std::cout << db.size() << std::endl;
+	std::map<std::string, double> db;
+	std::map<std::time_t, std::string> dates_table;
+	create_db(db, dbstream);
+	create_dates_table(dates_table, db);
 	// search for the occurrences
-	bitcoinExchange(input, db);
+	std::string line;
+	while (std::getline(inputstream, line))
+	{
+		bitcoinExchange(db, line, dates_table);
+	}
 }

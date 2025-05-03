@@ -6,25 +6,57 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:11 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/03 14:31:39 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:29:46 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <list>
 
 namespace PmergeMe
 {
-	class Vector : public std::vector<unsigned> {
+	template <typename Container>
+	class Sortable : public Container {
 		private:
-			bool isSorted();
-			
+			Sortable(const Sortable& src);
+			Sortable& operator=(const Sortable& rhs);
+		protected:
+			bool isSorted() {
+				typename Container::iterator current = this->begin();
+				typename Container::iterator next = current;
+				next++; if (next == this->end()) return true;
+				for (; next != this->end(); current++, next++)
+				{
+					if (*next < *current)
+						return false;
+				}
+				return (true);
+			}
+			Sortable() {}
+			~Sortable() {}
+		
+		public:
+			virtual void mergeInsertSort() = 0;
+	};
+
+	class Vector : public Sortable<std::vector<unsigned> > {
 		public:
 			Vector();
 			~Vector();
 			Vector(const Vector& src);
 			Vector& operator=(const Vector& rhs);
+
+			void mergeInsertSort();
+	};
+
+	class List : public Sortable<std::list<unsigned> > {
+		public:
+			List();
+			~List();
+			List(const List& src);
+			List& operator=(const List& rhs);
 
 			void mergeInsertSort();
 	};

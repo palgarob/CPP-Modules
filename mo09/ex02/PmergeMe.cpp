@@ -6,17 +6,17 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/03 16:02:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:49:08 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <iostream>
 
-PmergeMe::Vector::Vector() : std::vector<unsigned>() {}
+PmergeMe::Vector::Vector() : PmergeMe::Sortable<std::vector<unsigned> >() {}
 PmergeMe::Vector::~Vector() {}
 
-PmergeMe::Vector::Vector(const PmergeMe::Vector& src) : std::vector<unsigned>()
+PmergeMe::Vector::Vector(const PmergeMe::Vector& src) : PmergeMe::Sortable<std::vector<unsigned> >()
 {
 	*this = src;
 }
@@ -76,15 +76,67 @@ void PmergeMe::Vector::mergeInsertSort() {
 	this->mergeInsertSort();
 }
 
-bool PmergeMe::Vector::isSorted()
+PmergeMe::List::List() : PmergeMe::Sortable<std::list<unsigned> >() {}
+PmergeMe::List::~List() {}
+
+PmergeMe::List::List(const PmergeMe::List& src) : PmergeMe::Sortable<std::list<unsigned> >()
 {
-	Vector::iterator current = this->begin();
-	Vector::iterator next = current;
-	next++; if (next == this->end()) return true;
-	for (; next != this->end(); current++, next++)
+	*this = src;
+}
+
+PmergeMe::List& PmergeMe::List::operator=(const PmergeMe::List& rhs)
+{
+	if (this != &rhs)
 	{
-		if (*next < *current)
-			return false;
+		this->clear();
+		this->insert(this->begin(), rhs.begin(), rhs.end());
 	}
-	return (true);
+	return *this;
+}
+
+void PmergeMe::List::mergeInsertSort() {
+	std::size_t size = this->size();
+	/* for (size_t i = 0; i < this->size(); i++)
+	{
+		std::cout << this->operator[](i) << std::endl;
+	} */
+	if (size > 2)
+	{
+		List greatest;
+		List lowest;
+		List::iterator current = this->begin();
+		List::iterator next = current; next++;
+		while (current != this->end())
+		{
+			if (next == this->end())
+			{
+				greatest.push_back(*current);
+				break ;
+			}
+			greatest.push_back(std::max(*current, *next));
+			lowest.push_back(std::min(*current, *next));
+			current++; current++;
+			next++; next++;
+		}
+		greatest.mergeInsertSort();
+		lowest.mergeInsertSort();
+		std::merge(greatest.begin(), greatest.end(), lowest.begin(), lowest.end(), this->begin());
+		return ;
+	}
+	if (size == 2)
+	{
+		if (this->isSorted())
+			return ;
+		else
+		{
+			List::iterator first = this->begin();
+			List::iterator second = first; second++;
+			std::swap(*first, *second);
+			return ;
+		}
+	}
+	if (size == 1)
+		return ;
+
+	this->mergeInsertSort();
 }

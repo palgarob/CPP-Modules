@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:30:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/04/30 21:28:25 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/02 10:11:32 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,17 @@ time_t strtotime(const std::string& line)
 	struct std::tm ts;
 	
 	ts.tm_year = (line[0] - '0') * 1000 + (line[1] - '0') * 100 + (line[2] - '0') * 10 + (line[3] - '0') - 1900;
+	if (ts.tm_year < 0)
+		return (-1);
 	ts.tm_mon = (line[5] - '0') * 10 + (line[6] - '0') - 1;
+	if (ts.tm_mon > 11)
+		return (-1);
 	ts.tm_mday = (line[8] - '0') * 10 + (line[9] - '0');
+	if (ts.tm_mday > 31)
+		return (-1);
 	ts.tm_sec = 0; ts.tm_min = 0; ts.tm_hour = 0; ts.tm_wday = 0; ts.tm_yday = 0; ts.tm_isdst = 0;
 	return (std::mktime(&ts));
-	/* ss.str(line.substr(13));
-	ss >> val;
-	if (ss.fail())
-	{
-		std::cerr << "Error: parsing number" << line << std::endl;
-		exit(1);
-	} */
-/* 	key = line.substr(0, 10);
-	if (strtotime(key) == -1)
-	{
-		std::cerr << "Error: parsing date" << line << std::endl;
-		exit(1);
-	} */
+	
 }
 
 void bitcoinExchange(
@@ -76,7 +70,14 @@ void bitcoinExchange(
 		std::cerr << "Error: parsing number " << line << std::endl;
 		return ;
 	}
-	std::string db_date = dates_table.find(strtotime(date))->second;
+	std::string db_date;
+	if (strtotime(date) > 0)
+		db_date = dates_table.find(strtotime(date))->second;
+	else
+	{
+		std::cerr << "Error: invalid date" << std::endl;
+		return ;
+	}
 	std::map<std::string, double>::const_iterator it = db.find(db_date);
 	double value;
 	if (it != db.end())

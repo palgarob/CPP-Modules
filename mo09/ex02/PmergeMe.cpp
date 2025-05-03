@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/03 15:07:58 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:02:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void PmergeMe::Vector::mergeInsertSort() {
 		Vector lowest;
 		Vector::iterator current = this->begin();
 		Vector::iterator next = current; next++;
-		for (; current != this->end(); current++, next++)
+		while (current != this->end())
 		{
-			
-			if (next != this->end())
+			if (next == this->end())
 			{
-				greatest.push_back(std::max(*current, *next));
-				lowest.push_back(std::min(*current, *next));
-			}
-			else
 				greatest.push_back(*current);
-			current++; next++;
+				break ;
+			}
+			greatest.push_back(std::max(*current, *next));
+			lowest.push_back(std::min(*current, *next));
+			current++; current++;
+			next++; next++;
 		}
 		greatest.mergeInsertSort();
 		lowest.mergeInsertSort();
@@ -73,9 +73,6 @@ void PmergeMe::Vector::mergeInsertSort() {
 	if (size == 1)
 		return ;
 
-	
-
-	
 	this->mergeInsertSort();
 }
 

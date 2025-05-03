@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:00 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/03 14:39:52 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:30:18 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static long g_vector_time = 0;
 	}
 } */
 
-void parse_vector(const std::vector<std::string> args, std::vector<unsigned>& v)
+void parse_vector(const std::vector<std::string> args, PmergeMe::Vector& v)
 {
 	std::stringstream ss;
 	unsigned n;

@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:59:39 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/04/30 21:02:43 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:02:13 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int main(int argc, char **argv)
 	std::string line;
 	while (std::getline(inputstream, line))
 	{
-		bitcoinExchange(db, line, dates_table);
+		if (std::isdigit(line[0]))
+			bitcoinExchange(db, line, dates_table);
 	}
 }

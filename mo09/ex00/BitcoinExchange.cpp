@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:30:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/02 10:11:32 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:08:08 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 time_t strtotime(const std::string& line)
 {
-	
-	
 	struct std::tm ts;
 	
 	ts.tm_year = (line[0] - '0') * 1000 + (line[1] - '0') * 100 + (line[2] - '0') * 10 + (line[3] - '0') - 1900;
@@ -55,19 +53,19 @@ void bitcoinExchange(
 	ss.str(line.substr(13));
 	double quantity;
 	ss >> quantity;
+	if (ss.fail() || !(ss.eof()))
+	{
+		std::cerr << "Error: bad input " << line << std::endl;
+		return ;
+	}
 	if (quantity < 0)
 	{
 		std::cerr << "Error: negative number " << line << std::endl;
 		return ;
 	}
-	if (quantity > 2147483647)
+	if (quantity > 1000)
 	{
-		std::cerr << "Error: too large a number" << line << std::endl;
-		return ;
-	}
-	if (ss.fail())
-	{
-		std::cerr << "Error: parsing number " << line << std::endl;
+		std::cerr << "Error: too large a number " << line << std::endl;
 		return ;
 	}
 	std::string db_date;

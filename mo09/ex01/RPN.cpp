@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:03:55 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/01 02:08:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/05 12:04:24 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void RPN::operate(char o)
 		case '-':
 			new_element = this->operands.top();
 			this->operands.pop();
-			new_element -= this->operands.top();
+			new_element = this->operands.top() - new_element;
 			this->operands.pop();
 			break ;
 		case '/':
 			new_element = this->operands.top();
 			this->operands.pop();
-			new_element /= this->operands.top();
+			new_element = this->operands.top() / new_element;
 			this->operands.pop();
 			break ;
 		default :

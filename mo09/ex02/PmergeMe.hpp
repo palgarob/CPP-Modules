@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:11 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/03 16:29:46 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:35:59 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ namespace PmergeMe
 			}
 			Sortable() {}
 			~Sortable() {}
-		
 		public:
 			virtual void mergeInsertSort() = 0;
+			virtual void FJJ() = 0;
 	};
 
 	class Vector : public Sortable<std::vector<unsigned> > {
@@ -49,6 +49,7 @@ namespace PmergeMe
 			Vector& operator=(const Vector& rhs);
 
 			void mergeInsertSort();
+			void FJJ();
 	};
 
 	class List : public Sortable<std::list<unsigned> > {
@@ -59,6 +60,7 @@ namespace PmergeMe
 			List& operator=(const List& rhs);
 
 			void mergeInsertSort();
+			void FJJ();
 	};
 
 	template <typename Container>
@@ -70,4 +72,6 @@ namespace PmergeMe
 			std::cout << "	" << *current;
 		std::cout << "	"  << *current;
 	}
+
+	int jacobsthal(int n);
 }

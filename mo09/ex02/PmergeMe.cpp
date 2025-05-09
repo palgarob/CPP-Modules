@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/03 16:49:08 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:40:07 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@ PmergeMe::Vector& PmergeMe::Vector::operator=(const PmergeMe::Vector& rhs)
 	{
 		this->clear(); // Clear current contents
 		this->insert(this->begin(), rhs.begin(), rhs.end()); // Copy contents from rhs
+	}
+	return *this;
+}
+
+
+PmergeMe::List::List() : PmergeMe::Sortable<std::list<unsigned> >() {}
+PmergeMe::List::~List() {}
+
+PmergeMe::List::List(const PmergeMe::List& src) : PmergeMe::Sortable<std::list<unsigned> >()
+{
+	*this = src;
+}
+
+PmergeMe::List& PmergeMe::List::operator=(const PmergeMe::List& rhs)
+{
+	if (this != &rhs)
+	{
+		this->clear();
+		this->insert(this->begin(), rhs.begin(), rhs.end());
 	}
 	return *this;
 }
@@ -76,23 +95,6 @@ void PmergeMe::Vector::mergeInsertSort() {
 	this->mergeInsertSort();
 }
 
-PmergeMe::List::List() : PmergeMe::Sortable<std::list<unsigned> >() {}
-PmergeMe::List::~List() {}
-
-PmergeMe::List::List(const PmergeMe::List& src) : PmergeMe::Sortable<std::list<unsigned> >()
-{
-	*this = src;
-}
-
-PmergeMe::List& PmergeMe::List::operator=(const PmergeMe::List& rhs)
-{
-	if (this != &rhs)
-	{
-		this->clear();
-		this->insert(this->begin(), rhs.begin(), rhs.end());
-	}
-	return *this;
-}
 
 void PmergeMe::List::mergeInsertSort() {
 	std::size_t size = this->size();
@@ -139,4 +141,14 @@ void PmergeMe::List::mergeInsertSort() {
 		return ;
 
 	this->mergeInsertSort();
+}
+
+void PmergeMe::Vector::FJJ() {
+	
+}
+
+int	PmergeMe::jacobsthal(int n)
+{
+	if (n == 0) return 0;
+	i(n ==)
 }

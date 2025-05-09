@@ -6,11 +6,12 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:03:55 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/05 12:04:24 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/09 00:08:33 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
+#include <stdexcept>
 
 RPN::RPN() {}
 RPN::~RPN() {}
@@ -57,6 +58,8 @@ void RPN::operate(char o)
 			break ;
 		case '/':
 			new_element = this->operands.top();
+			if (new_element == 0)
+				throw (std::runtime_error("Error: division by zero"));
 			this->operands.pop();
 			new_element = this->operands.top() / new_element;
 			this->operands.pop();

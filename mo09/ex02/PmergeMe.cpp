@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/13 14:44:39 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:50:21 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,10 @@ void PmergeMe::List::mergeInsertSort() {
 		greatest.mergeInsertSort();
 
 		std::list<int> sequence = generate_jacobsthal_order<std::list<int> >(lowest.size());
+		std::cout << sequence.size() << std::endl;
 		std::list<int>::const_iterator it = sequence.begin();
-		for (;
+		for (
+			;
 			it != sequence.end(); 
 			it++
 		)

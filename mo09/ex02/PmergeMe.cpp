@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/12 19:21:25 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:44:39 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ void PmergeMe::Vector::mergeInsertSort() {
 			current++; current++;
 			next++; next++;
 		}
+
 		greatest.mergeInsertSort();
+
 		std::vector<int> sequence = generate_jacobsthal_order<std::vector<int> >(lowest.size());
-		for (std::vector<int>::iterator it = sequence.begin(); it != sequence.end(); it++)
+		for (std::vector<int>::const_iterator it = sequence.begin(); it != sequence.end(); it++)
 		{
 			std::vector<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest[*it]);
 			greatest.insert(pos, lowest[*it]);
@@ -110,10 +112,6 @@ void PmergeMe::Vector::mergeInsertSort() {
 
 void PmergeMe::List::mergeInsertSort() {
 	std::size_t size = this->size();
-	/* for (size_t i = 0; i < this->size(); i++)
-	{
-		std::cout << this->operator[](i) << std::endl;
-	} */
 	if (size > 2)
 	{
 		List greatest;
@@ -132,9 +130,26 @@ void PmergeMe::List::mergeInsertSort() {
 			current++; current++;
 			next++; next++;
 		}
+
 		greatest.mergeInsertSort();
-		lowest.mergeInsertSort();
-		std::merge(greatest.begin(), greatest.end(), lowest.begin(), lowest.end(), this->begin());
+
+		std::list<int> sequence = generate_jacobsthal_order<std::list<int> >(lowest.size());
+		std::list<int>::const_iterator it = sequence.begin();
+		for (;
+			it != sequence.end(); 
+			it++
+		)
+		{
+			std::list<unsigned>::const_iterator it2 = lowest.begin(); for (unsigned i = 0; i < *it2; it2++);
+			std::list<unsigned>::iterator pos;
+			pos = std::lower_bound(greatest.begin(), greatest.end(), *it2);
+			greatest.insert(pos, *it2);
+		}
+		if (this->size() % 2 == 1)
+		{
+			std::list<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest.back());
+			greatest.insert(pos, lowest.back());
+		}
 		return ;
 	}
 	if (size == 2)

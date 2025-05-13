@@ -6,12 +6,15 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/09 15:40:07 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/12 19:21:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <iostream>
+#include <algorithm>
+
+/// Vector
 
 PmergeMe::Vector::Vector() : PmergeMe::Sortable<std::vector<unsigned> >() {}
 PmergeMe::Vector::~Vector() {}
@@ -25,12 +28,13 @@ PmergeMe::Vector& PmergeMe::Vector::operator=(const PmergeMe::Vector& rhs)
 {
 	if (&rhs != this)
 	{
-		this->clear(); // Clear current contents
-		this->insert(this->begin(), rhs.begin(), rhs.end()); // Copy contents from rhs
+		this->clear();
+		this->insert(this->begin(), rhs.begin(), rhs.end());
 	}
 	return *this;
 }
 
+/// List
 
 PmergeMe::List::List() : PmergeMe::Sortable<std::list<unsigned> >() {}
 PmergeMe::List::~List() {}
@@ -50,12 +54,10 @@ PmergeMe::List& PmergeMe::List::operator=(const PmergeMe::List& rhs)
 	return *this;
 }
 
+/// merge insert vector
+
 void PmergeMe::Vector::mergeInsertSort() {
 	std::size_t size = this->size();
-	/* for (size_t i = 0; i < this->size(); i++)
-	{
-		std::cout << this->operator[](i) << std::endl;
-	} */
 	if (size > 2)
 	{
 		Vector greatest;
@@ -75,8 +77,17 @@ void PmergeMe::Vector::mergeInsertSort() {
 			next++; next++;
 		}
 		greatest.mergeInsertSort();
-		lowest.mergeInsertSort();
-		std::merge(greatest.begin(), greatest.end(), lowest.begin(), lowest.end(), this->begin());
+		std::vector<int> sequence = generate_jacobsthal_order<std::vector<int> >(lowest.size());
+		for (std::vector<int>::iterator it = sequence.begin(); it != sequence.end(); it++)
+		{
+			std::vector<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest[*it]);
+			greatest.insert(pos, lowest[*it]);
+		}
+		if (this->size() % 2 == 1)
+		{
+			std::vector<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest.back());
+			greatest.insert(pos, lowest.back());
+		}
 		return ;
 	}
 	if (size == 2)
@@ -95,6 +106,7 @@ void PmergeMe::Vector::mergeInsertSort() {
 	this->mergeInsertSort();
 }
 
+/// merge insert list
 
 void PmergeMe::List::mergeInsertSort() {
 	std::size_t size = this->size();
@@ -141,14 +153,4 @@ void PmergeMe::List::mergeInsertSort() {
 		return ;
 
 	this->mergeInsertSort();
-}
-
-void PmergeMe::Vector::FJJ() {
-	
-}
-
-int	PmergeMe::jacobsthal(int n)
-{
-	if (n == 0) return 0;
-	i(n ==)
 }

@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:11 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/09 15:35:59 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:20:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ namespace PmergeMe
 			~Sortable() {}
 		public:
 			virtual void mergeInsertSort() = 0;
-			virtual void FJJ() = 0;
 	};
 
 	class Vector : public Sortable<std::vector<unsigned> > {
@@ -49,7 +48,6 @@ namespace PmergeMe
 			Vector& operator=(const Vector& rhs);
 
 			void mergeInsertSort();
-			void FJJ();
 	};
 
 	class List : public Sortable<std::list<unsigned> > {
@@ -60,7 +58,6 @@ namespace PmergeMe
 			List& operator=(const List& rhs);
 
 			void mergeInsertSort();
-			void FJJ();
 	};
 
 	template <typename Container>
@@ -72,6 +69,34 @@ namespace PmergeMe
 			std::cout << "	" << *current;
 		std::cout << "	"  << *current;
 	}
-
-	int jacobsthal(int n);
 }
+
+long jacobsthal(int n);
+template<typename Container>
+Container generate_jacobsthal_order(int n) {
+	Container order;
+	Container seen;
+
+	int i = 1;
+	while (true) {
+		int j = jacobsthal(i);
+		if (j >= n) break;
+		if (std::find(seen.begin(), seen.end(), j) == seen.end()) {
+			order.push_back(j);
+			seen.push_back(j);
+		}
+		++i;
+	}
+
+	for (int i = 0; i < n; ++i) {
+		if (std::find(seen.begin(), seen.end(), i) == seen.end())
+			order.push_back(i);
+	}
+
+	return order;
+}
+
+long benchmark_vector(std::vector<std::string> args, PmergeMe::Vector& result);
+long benchmark_list(std::vector<std::string> args, PmergeMe::List& result);
+void parse_list(const std::vector<std::string> args, PmergeMe::List& v);
+void parse_vector(const std::vector<std::string> args, PmergeMe::Vector& v);

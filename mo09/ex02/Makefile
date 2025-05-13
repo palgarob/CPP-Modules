@@ -1,16 +1,21 @@
-NAME	= PmergeMe
-FILES	= main.cpp PmergeMe.cpp PmergeMe.hpp
+NAME	:= PmergeMe
+SRC		:= $(wildcard *.cpp)
+OBJ		:= $(SRC:.cpp=.o)
 
-.PHONY : all clean re fclean
+.PHONY : all re clean fclean 
 
 all : $(NAME)
 
-$(NAME) : $(FILES)
-	c++ -Wall -Wextra -Werror -std=c++98 -g $(FILES) -o $(NAME)
+$(NAME) : $(OBJ)
+	c++ $(OBJ) -o $@
+
+%.o : %.cpp
+	c++ -Wall -Wextra -Werror -std=c++98 -c $< -o $@
 
 re : fclean all
 
-clean : all
+fclean : clean
+	$(RM) $(NAME)
 
-fclean :
-	rm -rf $(NAME)
+clean :
+	rm -rf $(OBJ)

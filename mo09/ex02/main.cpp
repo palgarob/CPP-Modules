@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:00 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/13 16:11:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:11:11 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int main(int argc, char **argv)
 	PmergeMe::Vector v_sorted;
 	long list_time = benchmark_vector(args, v_sorted);
 	std::cout << "Before:	"; PmergeMe::printNumbers(v_unsorted); std::cout << std::endl;
-//	std::cout << "Before:	"; PmergeMe::printNumbers(l_unsorted); std::cout << std::endl;
-//	std::cout << "After:	"; PmergeMe::printNumbers(v_sorted); std::cout << std::endl;
+	std::cout << "Before:	"; PmergeMe::printNumbers(l_unsorted); std::cout << std::endl;
+	std::cout << "After:	"; PmergeMe::printNumbers(v_sorted); std::cout << std::endl;
 	std::cout << "After:	"; PmergeMe::printNumbers(l_sorted); std::cout << std::endl;
 	std::cout << "Time to process a range of " << v_sorted.size() << " elements with a vector: " << vector_time << " us" << std::endl;
 	std::cout << "Time to process a range of " << l_sorted.size() << " elements with a list: " << list_time << " us" << std::endl;

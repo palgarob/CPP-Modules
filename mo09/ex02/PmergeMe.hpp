@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:11 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/13 16:10:06 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:37:18 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ namespace PmergeMe
 				next++; if (next == this->end()) return true;
 				for (; next != this->end(); current++, next++)
 				{
-					if (*next < *current)
+					if (*next > *current) /// hiugfdsrardhfgjklbjvghcfgdfgh
 						return false;
 				}
 				return (true);
@@ -48,6 +48,7 @@ namespace PmergeMe
 			Vector& operator=(const Vector& rhs);
 
 			void mergeInsertSort();
+			void jacobsthalReorder();
 	};
 
 	class List : public Sortable<std::list<unsigned> > {
@@ -58,6 +59,7 @@ namespace PmergeMe
 			List& operator=(const List& rhs);
 
 			void mergeInsertSort();
+			void jacobsthalReorder();
 	};
 
 	template <typename Container>
@@ -72,30 +74,7 @@ namespace PmergeMe
 }
 
 long jacobsthal(int n);
-template<typename Container>
-Container generate_jacobsthal_order(int n) {
-	Container order;
-	Container seen;
-
-	int i = 1;
-	while (true) {
-		int j = jacobsthal(i);
-		if (j >= n) break;
-		if (std::find(seen.begin(), seen.end(), j) == seen.end()) {
-			order.push_back(j);
-			seen.push_back(j);
-		}
-		++i;
-	}
-
-	for (int i = 0; i < n; ++i) {
-		if (std::find(seen.begin(), seen.end(), i) == seen.end())
-			order.push_back(i);
-	}
-
-	return order;
-}
-
+bool isJacobsthal(int n);
 long benchmark_vector(std::vector<std::string> args, PmergeMe::Vector& result);
 long benchmark_list(std::vector<std::string> args, PmergeMe::List& result);
 void parse_list(const std::vector<std::string> args, PmergeMe::List& v);

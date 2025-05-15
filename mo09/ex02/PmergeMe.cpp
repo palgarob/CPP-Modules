@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/13 14:50:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:14:44 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,120 +54,138 @@ PmergeMe::List& PmergeMe::List::operator=(const PmergeMe::List& rhs)
 	return *this;
 }
 
+/// Jacobsthal reorder
+
+void PmergeMe::List::jacobsthalReorder() {
+	List remainders_unordered = *this;
+	List aux;
+	this->clear();
+	List::iterator it = remainders_unordered.begin();
+	for (int i = 0; it != remainders_unordered.end(); it++, i++)
+	{
+		if (i == 2 || !isJacobsthal(i))
+			aux.push_back(*it);
+		else
+			this->push_back(*it);
+	}
+	this->insert(this->end(), aux.begin(), aux.end());
+	/* List remainders_unordered = *this;
+	List::iterator it = remainders_unordered.begin();
+	this->clear();
+	int i = 0;
+	while (true) {
+		if (i == 2) {i++; continue;}
+		int jacob_num = jacobsthal(i);
+		for (; jacob_num > 0; jacob_num--, it++);
+		this->push_back(*it);
+		i++;
+		if (jacobsthal(i) >= static_cast<int>(remainders_unordered.size()))
+			break;
+	}
+	it = remainders_unordered.begin();
+	for (i = 0; it != remainders_unordered.end(); it++, i++)
+	{
+		if (isJacobsthal(i))
+			continue;
+		this->push_back(*it);
+	} */
+}
+
+void PmergeMe::Vector::jacobsthalReorder() 
+{
+	Vector remainders_unordered = *this;
+	Vector aux;
+	this->clear();
+	for (int i = 0; i < static_cast<int>(remainders_unordered.size()); i++)
+	{
+		if (i == 2 || !isJacobsthal(i))
+			aux.push_back(remainders_unordered[i]);
+		else
+			this->push_back(remainders_unordered[i]);
+	}
+	this->insert(this->end(), aux.begin(), aux.end());
+}
 /// merge insert vector
 
 void PmergeMe::Vector::mergeInsertSort() {
-	std::size_t size = this->size();
-	if (size > 2)
+	Vector highest;
+	Vector remainder;
+	Vector::iterator current = this->begin();
+	Vector::iterator next = current;
+	if (next != this->end()) next++;
+	while (current != this->end())
 	{
-		Vector greatest;
-		Vector lowest;
-		Vector::iterator current = this->begin();
-		Vector::iterator next = current; next++;
-		while (current != this->end())
-		{
-			if (next == this->end())
-			{
-				greatest.push_back(*current);
-				break ;
-			}
-			greatest.push_back(std::max(*current, *next));
-			lowest.push_back(std::min(*current, *next));
-			current++; current++;
-			next++; next++;
-		}
-
-		greatest.mergeInsertSort();
-
-		std::vector<int> sequence = generate_jacobsthal_order<std::vector<int> >(lowest.size());
-		for (std::vector<int>::const_iterator it = sequence.begin(); it != sequence.end(); it++)
-		{
-			std::vector<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest[*it]);
-			greatest.insert(pos, lowest[*it]);
-		}
-		if (this->size() % 2 == 1)
-		{
-			std::vector<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest.back());
-			greatest.insert(pos, lowest.back());
-		}
-		return ;
+		if (next == this->end()) break;
+		highest.push_back(std::max(*current, *next));
+		remainder.push_back(std::min(*current, *next));
+		if (current != this->end()) current++;
+		if (current != this->end()) current++;
+		if (next != this->end()) next++;
+		if (next != this->end()) next++;
 	}
-	if (size == 2)
+	
+	if (highest.size() > 2)
+		highest.mergeInsertSort();
+	else
 	{
-		if (this->isSorted())
-			return ;
-		else
-		{
-			std::swap(this->operator[](0), this->operator[](1));
-			return ;
-		}
+		if (highest.front() > highest.back())
+		std::swap(highest.front(), highest.back());
 	}
-	if (size == 1)
-		return ;
-
-	this->mergeInsertSort();
+	remainder.jacobsthalReorder();
+	for (Vector::const_iterator it = remainder.begin(); it != remainder.end(); it++)
+	{
+		Vector::iterator pos;
+		pos = std::lower_bound(highest.begin(), highest.end(), *it);
+		highest.insert(pos, *it);
+	}
+	if (this->size() % 2 == 1)
+	{
+		Vector::iterator pos;
+		pos = std::lower_bound(highest.begin(), highest.end(), this->back());
+		highest.insert(pos, this->back());
+	}
+	this->clear();
+	*this = highest;
 }
 
 /// merge insert list
 
 void PmergeMe::List::mergeInsertSort() {
-	std::size_t size = this->size();
-	if (size > 2)
+	List highest;
+	List remainder;
+	List::iterator current = this->begin();
+	List::iterator next = current;
+	if (next != this->end()) next++;
+	while (current != this->end())
 	{
-		List greatest;
-		List lowest;
-		List::iterator current = this->begin();
-		List::iterator next = current; next++;
-		while (current != this->end())
-		{
-			if (next == this->end())
-			{
-				greatest.push_back(*current);
-				break ;
-			}
-			greatest.push_back(std::max(*current, *next));
-			lowest.push_back(std::min(*current, *next));
-			current++; current++;
-			next++; next++;
-		}
-
-		greatest.mergeInsertSort();
-
-		std::list<int> sequence = generate_jacobsthal_order<std::list<int> >(lowest.size());
-		std::cout << sequence.size() << std::endl;
-		std::list<int>::const_iterator it = sequence.begin();
-		for (
-			;
-			it != sequence.end(); 
-			it++
-		)
-		{
-			std::list<unsigned>::const_iterator it2 = lowest.begin(); for (unsigned i = 0; i < *it2; it2++);
-			std::list<unsigned>::iterator pos;
-			pos = std::lower_bound(greatest.begin(), greatest.end(), *it2);
-			greatest.insert(pos, *it2);
-		}
-		if (this->size() % 2 == 1)
-		{
-			std::list<unsigned>::iterator pos = std::lower_bound(greatest.begin(), greatest.end(), lowest.back());
-			greatest.insert(pos, lowest.back());
-		}
-		return ;
+		if (next == this->end()) break;
+		highest.push_back(std::max(*current, *next));
+		remainder.push_back(std::min(*current, *next));
+		if (current != this->end()) current++;
+		if (current != this->end()) current++;
+		if (next != this->end()) next++;
+		if (next != this->end()) next++;
 	}
-	if (size == 2)
+	if (highest.size() > 2)
+		highest.mergeInsertSort();
+	else
 	{
-		if (this->isSorted())
-			return ;
-		else
-		{
-			List::iterator first = this->begin();
-			List::iterator second = first; second++;
-			std::swap(*first, *second);
-			return ;
-		}
+		if (highest.front() > highest.back())
+		std::swap(highest.front(), highest.back());
 	}
-	if (size == 1)
-		return ;
-
-	this->mergeInsertSort();
+	remainder.jacobsthalReorder();
+	for (List::iterator it = remainder.begin(); it != remainder.end(); it++)
+	{
+		List::iterator pos;
+		pos = std::lower_bound(highest.begin(), highest.end(), *it);
+		highest.insert(pos, *it);
+	}
+	if (this->size() % 2 == 1)
+	{
+		List::iterator pos;
+		pos = std::lower_bound(highest.begin(), highest.end(), this->back());
+		highest.insert(pos, this->back());
+	}
+	this->clear();
+	*this = highest;
 }

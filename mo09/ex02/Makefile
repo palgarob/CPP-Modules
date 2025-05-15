@@ -10,7 +10,7 @@ $(NAME) : $(OBJ)
 	c++ $(OBJ) -o $@
 
 %.o : %.cpp
-	c++ -Wall -Wextra -Werror -std=c++98 -c $< -o $@
+	c++ -Wall -Wextra -Werror -g -std=c++98 -c $< -o $@
 
 re : fclean all
 

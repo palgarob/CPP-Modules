@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:59:39 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/05 11:02:13 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:41:58 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,22 @@
 #include <sstream>
 #include <limits>
 
-void create_db(std::map<std::string, double>& db, std::ifstream& dbstream)
+void create_db(BtcDB& db, std::ifstream& dbstream)
 {
 	std::string line;
 	std::stringstream ss;
-	std::string key;
+	time_t key;
 	double val;
 	
 	while (std::getline(dbstream, line))
 	{
-		key = line.substr(0, 10);
+		if (line == "date,exchange_rate")
+			continue ;
+		key = date_parser(line.substr(0, 10));
 		ss.clear();
 		ss.str(line.substr(11));
-		ss >> val;
-		db[key] = val;
-	}
-}
-
-void create_dates_table(
-	std::map<std::time_t, std::string>& dates_table,
-	const std::map<std::string, double>& db
-)
-{
-	std::map<std::string, double>::const_iterator it = db.begin();
-	std::map<std::string, double>::const_iterator next = it;
-	next++;
-	for (std::time_t key = 0; key < strtotime("2026-01-01"); key += 86400)
-	{
-		dates_table[key] = it->first;
-		if (next != db.end() && key > strtotime(next->first)) {
-			it++; next++;
-		}
+		if (ss >> val)
+			db[key] = val;
 	}
 }
 
@@ -62,31 +47,48 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		std::cerr << "Error: wrong number of arguments" << std::endl;
-		exit(1);
+		return (1);
 	}
 	// open files
 	std::ifstream dbstream("data.csv");
 	if (dbstream.fail())
 	{
 		std::cerr << "Error: could not open data base file" << std::endl;
-		exit(1);
+		return (1);
 	}
 	std::ifstream inputstream(argv[1]);
 	if (inputstream.fail())
 	{
 		std::cerr << "Error: could not open input file" << std::endl;
-		exit(1);
+		return (1);
 	}
-	// create maps
-	std::map<std::string, double> db;
-	std::map<std::time_t, std::string> dates_table;
+	BtcDB db;
 	create_db(db, dbstream);
-	create_dates_table(dates_table, db);
-	// search for the occurrences
 	std::string line;
 	while (std::getline(inputstream, line))
 	{
-		if (std::isdigit(line[0]))
-			bitcoinExchange(db, line, dates_table);
+		if (line == "date | value")
+			continue ;
+		try {
+			time_t t = date_parser(line.substr(0, 10));
+			std::stringstream ss;
+			ss.str(line.substr(13));
+			if (ss.peek() != EOF)
+				throw ("Error: no characters after the quantity allowed. Problem: " + line);
+			double quantity;
+			ss >> quantity;
+			try
+			{
+				db.bitcoinExchange(t, quantity);
+			}
+			catch (std::exception& e)
+			{
+				std::cerr << e.what() << std::endl;
+			}
+		}
+		catch (std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
 	}
 }

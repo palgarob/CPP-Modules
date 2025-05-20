@@ -1,5 +1,5 @@
 NAME	:= btc
-SRC		:= $(wildcard *.cpp)
+SRC		:= BitcoinExchange.cpp date_parser.cpp main.cpp
 OBJ		:= $(SRC:.cpp=.o)
 
 .PHONY : all re clean fclean 

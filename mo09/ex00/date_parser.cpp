@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:41:24 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/19 18:35:00 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:30:20 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include <sstream>
 #include <ctime>
 #include <cstring>
+#include <iostream>
 
 const std::string get_date(time_t t)
 {
 		std::tm* ptm = std::localtime(&t);
-		char buffer[11]; // YYYY-MM-DD is 10 chars + null terminator
-		// Format: YYYY-MM-DD
+		char buffer[11];
 		std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", ptm);
 		return std::string(buffer);
 }
@@ -60,7 +60,9 @@ time_t date_parser(const std::string& date_string)
 	int maxDays = daysInMonth[m];
 	if (m == 2 && isLeap(y)) 
 		maxDays = 29;
-	if (d <= maxDays)
+	if (d > maxDays)
+	{
 		throw (std::invalid_argument("Error: date doesn't exist. Problem: " + date_string));
+	}
 	return (get_time(y, m, d));
 }

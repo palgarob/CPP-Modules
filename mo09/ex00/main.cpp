@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:59:39 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/19 18:41:58 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:10:40 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <sstream>
 #include <limits>
 
-void create_db(BtcDB& db, std::ifstream& dbstream)
+static void create_db(BtcDB& db, std::ifstream& dbstream)
 {
 	std::string line;
 	std::stringstream ss;
@@ -40,6 +40,12 @@ void create_db(BtcDB& db, std::ifstream& dbstream)
 			db[key] = val;
 	}
 }
+
+/* static void check_stream_state(const std::stringstream& ss, const std::string& str)
+{
+	if (ss.fail())
+		throw (std::invalid_argument("Error: use a double for the quantity. Problem: " + str));
+} */
 
 int main(int argc, char **argv)
 {
@@ -62,6 +68,7 @@ int main(int argc, char **argv)
 		std::cerr << "Error: could not open input file" << std::endl;
 		return (1);
 	}
+
 	BtcDB db;
 	create_db(db, dbstream);
 	std::string line;
@@ -70,25 +77,28 @@ int main(int argc, char **argv)
 		if (line == "date | value")
 			continue ;
 		try {
+			if (line.substr(10, 3) != " | ")
+				throw (std::invalid_argument("Error: use the specified pipe format ' | '. Problem: " + line));
 			time_t t = date_parser(line.substr(0, 10));
 			std::stringstream ss;
+			ss.clear();
 			ss.str(line.substr(13));
-			if (ss.peek() != EOF)
-				throw ("Error: no characters after the quantity allowed. Problem: " + line);
 			double quantity;
 			ss >> quantity;
-			try
-			{
-				db.bitcoinExchange(t, quantity);
-			}
-			catch (std::exception& e)
-			{
-				std::cerr << e.what() << std::endl;
-			}
+			if (ss.fail())
+				throw (std::invalid_argument("Error: use a double for the quantity. Problem: " + line));
+			if (ss.peek() != EOF)
+				throw (std::invalid_argument("Error: no characters after the quantity allowed. Problem: " + line));
+			if (quantity < 0)
+				throw (std::invalid_argument("Error: no negative numbers allowed. Problem: " + line));
+			if (quantity > 1000)
+				throw (std::invalid_argument("Error: too large a number. Problem: " + line));
+			db.bitcoinExchange(t, quantity);
 		}
 		catch (std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
+			continue ;
 		}
 	}
 }

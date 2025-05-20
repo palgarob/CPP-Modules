@@ -1,5 +1,5 @@
 NAME	:= RPN
-SRC		:= $(wildcard *.cpp)
+SRC		:= main.cpp RPN.cpp
 OBJ		:= $(SRC:.cpp=.o)
 
 .PHONY : all re clean fclean 

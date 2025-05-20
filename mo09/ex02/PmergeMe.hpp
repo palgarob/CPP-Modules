@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:55:11 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/05/13 19:37:18 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:27:28 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,22 @@ namespace PmergeMe
 	{
 		typename Container::const_iterator current = container.begin();
 		typename Container::const_iterator next = current; next++;
-		for (; next != container.end(); current++, next++)
+		for (int i = 0; next != container.end(); current++, next++, i++)
+		{
+			if (i > 10)
+			{
+				std::cout << "	[...]" << std::endl;
+				return ;
+			}
 			std::cout << "	" << *current;
+		}
 		std::cout << "	"  << *current;
 	}
 }
 
-long jacobsthal(int n);
+double jacobsthal(int n);
 bool isJacobsthal(int n);
-long benchmark_vector(std::vector<std::string> args, PmergeMe::Vector& result);
-long benchmark_list(std::vector<std::string> args, PmergeMe::List& result);
+double benchmark_vector(std::vector<std::string> args, PmergeMe::Vector& result);
+double benchmark_list(std::vector<std::string> args, PmergeMe::List& result);
 void parse_list(const std::vector<std::string> args, PmergeMe::List& v);
 void parse_vector(const std::vector<std::string> args, PmergeMe::Vector& v);

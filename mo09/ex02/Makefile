@@ -1,5 +1,5 @@
 NAME	:= PmergeMe
-SRC		:= $(wildcard *.cpp)
+SRC		:= main.cpp benchmark.cpp jacobsthal.cpp parse.cpp PmergeMe.cpp
 OBJ		:= $(SRC:.cpp=.o)
 
 .PHONY : all re clean fclean 
